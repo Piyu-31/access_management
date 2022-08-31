@@ -1,0 +1,269 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block Con_formTemp %}
+
+
+<section id="top" class="container-fluid text-center bg bg-light border-double mt-4 pb-4 pt-4">
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 text-left">
+          <a href="#section1" class="btn btn-dark" data-toggle="collapse">Add User &nbsp;<i class="fa fa-plus"></i></a>
+        </div>
+   <!-- number -->
+      <form class="form-horizontal col-lg-3 col-md-3 col-sm-6 col-xs-12" method="POST" action="/search_con_records/1">
+        <div class="row">
+            <div class="form-group mr-1">
+                <input type="text" class="form-control" id="searchbynumber" placeholder="Contractor#" name="searchbynumber">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </form>
+    <!-- Org Name -->
+    <form class="form-horizontal col-lg-3 col-md-3 col-sm-6 col-xs-12" method="POST" action="/search_con_records/2">
+      <div class="row">
+          <div class="form-group mr-1">
+            <input type="text" class="form-control" id="searchbyname" placeholder="Org Name" name="searchbyname">
+          </div>
+          <div class="form-group">
+          <button type="submit" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </div>
+      </div>
+    </form>
+    <form class="col-lg-1 col-md-1 col-sm-6 col-xs-12">
+            <div class="form-group">
+                    <a class="nav-link btn btn-outline-dark btn-sm" href="{{url_for('conWrapper')}}">All</a>
+                </div>
+        </form>
+  </div><!-- Content Section -->
+  <section id="section1" class=" collapse container-fluid">
+      <div class="row bg bg-lighta">
+          <div class="sec_title">
+              <h6>Contractor Access Management</h6>
+          </div>
+          <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('save_con_records')}}" id="conf" name="wform" >
+              <fieldset  class="row sec1">
+                  <legend align="left">Add Contractor User</legend>
+                  <div class="row">
+                  <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                    <div class="">
+                      <span class="input-group-text" id="basic-addon1">Org ID</span>
+                    </div>
+                     <input type="number" class="form-control mb-1" id="oid" placeholder="Org ID" name="oid" required>
+                    </div>
+                     <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Email</span>
+                      </div>
+                       <input type="email" class="form-control mb-1" id="eid" placeholder="Email" name="eid" required>
+                    </div>
+                    <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">User Type</span>
+                      </div>
+                      <select name="utype" id="utype" class="custom-select mb-3" required>
+                        <option value="" selected>Select User Type</option>
+                        <option value="Door Center">Central Facilty</option>
+                        <option value="Superuser">Superuser</option>
+                        <option value="Door Center">Door Center</option>
+                        <option value="Contractor">Contractor</option>
+                        <option value="Retailer">Retailer</option>
+                      </select> 
+                    </div>
+                    <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Sub User Type</span>
+                      </div>
+                      <select name="usubtype" class="custom-select mb-1" id="usubtype" required>
+                        <option value="select" selected>Select KC/TECH</option>
+                        <option value="Key Contact" {% if KeyContact == 'Key Contact' %} selected {% endif %} >Key
+                        Contact</option>
+                        <option value="Technician" {% if Technician == 'Technician' %} selected {% endif %}>Technician</option>
+                      </select> 
+                    </div>
+                    <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Sub User Type ID</span>
+                      </div>
+                       <input type="text" class="form-control mb-1" id="usubtid" placeholder="ID" name="usubtid" required>
+                    </div>
+                    <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">First Name</span>
+                      </div>
+                      <input type="text" class="form-control mb-1" id="fname" placeholder="First Name" name="fname">
+                    </div>
+                    <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Last Name</span>
+                      </div>
+                      <input type="text" class="form-control mb-1" id="lname" placeholder="Last Name" name="lname">
+                    </div>
+                     <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Mobile#</span>
+                      </div>
+                      <input type="tel" class="form-control mb-1" id="phone" placeholder="Mobile#" name="phone" pattern="[1-9]{1}[0-9]{9}" title="please input 10 digit Mobile Number" required>
+                    </div>
+                  </div>
+              </fieldset>
+              <div class="form-group col-lg-12 text-center m-4">
+                <button type="Submit" class="btn btn-primary">Add</button>
+              </div>
+                    </form>
+                
+            </div>
+        </section>
+</section>
+<!-- View table Section -->
+<section id="section2" class="bg bg-lighta">
+    <div class="sec_title">
+        <h6 id="select_txt">Contractors &nbsp;<span class="badge badge-pill badge-secondary">{{count_user}}</span></h6>
+    </div>
+
+    <div class="col-lg-12 col-md-12 mt-4 pt-3">
+      <div class="bg bg-dark text-light border border-white">
+        <div class="row">
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-4 pr-0 border border-light">Org ID</div>
+          <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Org Name</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">User Type</div>
+          <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">User ID</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Sub User Type</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Sub User ID</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Name</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Mobile#</div>
+          <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Action</div>
+        </div>
+      </div>
+      {% for c in conlist %}
+      <div class="row">
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-4 pr-0 border border-light">{{c["org_id"]}}</div>
+        
+        <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["org_name"]}}</div>
+        
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["user_type"]}}</div>
+        
+        <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["user_id"]}}</div>
+        
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["user_sub_type"]}}</div>
+        
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["user_sub_type_id"]}}</div>
+
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["first_name"]}}&nbsp;{{c["last_name"]}}</div>
+
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{c["user_contact"]}}</div>
+        
+        <div class="col-lg-2 text-left pt-2 pb-2 border border-light row">
+          <form method="POST" action="/editCon/{{c['_id']}}" class="" >
+            <div class="form-group">
+              <button type="submit" data-toggle="tooltip" title="Edit" class="btn btn-success btn-sm ml-2 mr-1 d-inline"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+            </div>
+          </form>
+
+          <span data-toggle="tooltip" title="Delete">
+            <button type="button" data-toggle="modal" data-target="#delete{{loop.index}}" class="btn btn-danger btn-sm d-inline mr-1"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          </span>
+
+          <span data-toggle="tooltip" title="Reset Password">
+            <button type="button" data-toggle="modal" data-target="#reset{{loop.index}}" class="btn btn-info btn-sm d-inline mr-1">&nbsp;<i class="fa fa-refresh" aria-hidden="true"></i></button>
+          </span>
+
+          <!-- Modal For Delete -->
+            <div class="modal fade" id="delete{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg bg-secondary text-light">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">     
+                        <h5>Are you sure you want to delete this user?</h5>
+                        <form method="POST" action="/deleteConUser/{{c['_id']}}" class="d-inline">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-danger btn-sm d-inline mr-1 float-right">Confirm &nbsp;<i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                        </div>
+                        </form>                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="reset{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg bg-secondary text-light">
+                      <h5 class="modal-title" id="exampleModal">Reset</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">     
+                        <h5>Are you trying to reset the password?</h5>
+                        <form method="POST" action="/resetcon/{{c['_id']}}" class="d-inline">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-success btn-sm d-inline mr-1 float-right">Confirm &nbsp;<i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                        </div>
+                        </form>                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+      </div>
+
+      {% endfor %}
+
+</div>
+
+
+
+    
+   
+<div class="row">                    
+        <div class="col-lg-10 text-right">
+            <div id="pagination" class="m-3">
+                <ul class="pagination pagination-sm">
+                               
+                    <li class="page-item">
+                        {% for pagenum in range(totalPages) %}
+                            <form class="d-inline" method="POST" action="/Con_page/{{pagenum}}/{{records_pages}}/{{search_code}}/{{search_term}}">
+                                <button type="submit" class="btn btn-dark btn-sm">{{pagenum+1}}</button>
+                            </form>
+                        {% endfor %}
+                    </li>                    
+                    <!-- <li class="page-item"><a class="btn btn-outline-dark btn-sm ml-1" href="#">Next</a></li> -->
+                </ul>
+            </div>
+        </div>
+</div>
+</section>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+
+
+<script>
+function get_userType_id() {
+  var ut = document.getElementById("usubtype");
+  var user_type = ut.options[ut.selectedIndex].text;
+  var kc = document.getElementById("usubtypeid_keyContact");
+  var tc = document.getElementById("usubtypeid_technician");
+  var empty = document.getElementById("usubtypeid_empty");
+
+  if (user_type == 'KeyContact'){
+    kc.style.display = "block";
+    empty.style.display = "none";
+    tc.style.display = "none";
+  }else if (user_type == 'Technician'){
+    kc.style.display = "none";
+    empty.style.display = "none";
+    tc.style.display = "block";
+  }else {
+    kc.style.display = "none";
+    empty.style.display = "block";
+    tc.style.display = "none";
+  }
+}
+</script>
+{% endblock %}

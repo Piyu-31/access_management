@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <style>
+        @-ms-viewport{
+          width: device-width;
+        }
+      </style>
+      <!-- <link href="style.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+      
+      <title>Access Management</title>
+   </head>
+   <body class="d-flex flex-column min-vh-100">
+    <div class="container-fluid" style="position: relative;">
+
+        {% set userNameCurrent=  user %}
+        <!-- Navbar Section -->
+        <nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="{{url_for('static', filename='images/Amarr_Black.png')}}" width="120" height="" alt="">
+                <!-- <sup>Access management</sup> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                  {% if userNameCurrent %}
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('index')}}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('dcWrapper')}}">Door Center<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('conWrapper')}}">Contractor<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('centralWrapper')}}">Central Facility<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('RetailersWrapper')}}">Retailer<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('CloudWrapper')}}">Cloud<span class="sr-only"></span></a>
+                    </li>
+                    <!-- <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('Con_ratesWrapper')}}"><span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('ratesWrapper')}}"><span class="sr-only"></span></a>
+                    </li> -->
+                    <li class="nav-item active dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rates
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{url_for('Con_ratesWrapper')}}">Contractor Labor Rates</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{url_for('ratesWrapper')}}">Retailer Labor Rates</a>
+                      </div>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('Feeds_Wrapper')}}">Reviews & Feedback<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('DIY_statusWrapper')}}">DIY Status<span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('FNI_statusWrapper')}}">F&I Status<span class="sr-only"></span></a>
+                    </li>
+                    {% else %}
+                      <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('login')}}">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#"  data-toggle="modal" data-target="#reset">Reset Password </a>
+                    </li>
+
+                    {% endif %}
+                </ul>
+                <span class="navbar-text">
+                    <h6 class="d-inline text-info">
+                      {% if userNameCurrent %}
+                        <a href="#"><h6 class="d-inline text-info">Welcome,</h6> &nbsp;{{userNameCurrent}}</a> &nbsp;&nbsp;
+                        <a href="{{url_for('logout')}}" class="d-inline btn btn-outline-info text-info">Logout &nbsp;<i class="fa fa-sign-out"></i></a>
+                      {% else %}
+                        <a href="#">Guest</a>
+                      {% endif %}
+                      </h6>   
+                </span>
+            </div>
+        </nav>
+        <!-- password Reset section -->
+        <div class="modal fade" tabindex="-1" id="reset">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form method="POST" action="{{url_for('reset_password')}}">
+                <div class="modal-header bg bg-secondary text-light">
+                  <h5 class="modal-title">Reset Password</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="text-light">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="User Id" aria-label="User Id" aria-describedby="basic-addon1" id="email" name="email">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone-square"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Phone" aria-label="Phone" aria-describedby="basic-addon1" id="phone" name="phone">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+             
+                 {% for message in messages %}
+                 <div class="alert alert-success" id="flashMsg">
+                  {{ message }}
+                </div>
+                 {% endfor %}
+              
+           {% endif %}
+        {% endwith %}
+        </div>
+      
+
+              
+
+           {% block DC_formTemp %}  {% endblock %}
+           {% block DC_editTemp %}  {% endblock %}
+           {% block Con_formTemp %} {% endblock %}
+           {% block Con_editTemp %} {% endblock %}
+           {% block ASC_formTemp %} {% endblock %}
+           {% block ASC_editTemp %} {% endblock %}
+           {% block Ret_formTemp %} {% endblock %}
+           {% block Ret_editTemp %} {% endblock %}
+           {% block login %}        {% endblock %}
+           {% block home_temp %}    {% endblock %}
+           {% block review_editTemp %} {% endblock %}
+           {% block review_formTemp %} {% endblock %}
+           {% block rates_formTemp %}    {% endblock %}
+           {% block rates_editTemp %}    {% endblock %}
+           {% block conrates_formTemp %} {% endblock %}
+           {% block conrates_editTemp %} {% endblock %}
+           {% block Cloud_formTemp %}   {% endblock %}
+           {% block Cloud_editTemp %}   {% endblock %}
+           {% block status_formTemp %}  {% endblock %}
+           {% block status_editTemp %}  {% endblock %}
+           {% block fnistatus_formTemp %} {% endblock %}
+           {% block fnistatus_editTemp %}  {% endblock %}
+
+            
+          
+
+    </div>
+
+ <footer class="bg bg-dark p-3 mt-auto text-center">
+      <a href="#">footer contents</a>
+</footer>
+
+     
+
+
+      <!-- for local file -->
+      <!--<script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>-->
+
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+      <script type="text/javascript"> 
+            setTimeout(function() {
+                  $('#flashMsg').remove();
+            }, 3000); 
+      </script>
+
+      <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip({html:true});   
+      });
+      </script>
+
+
+      
+   </body>
+</html>

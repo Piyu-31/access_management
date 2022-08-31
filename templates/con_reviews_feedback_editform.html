@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block review_editTemp %}
+<section id="section1" class="container-fluid">
+<div class="row bg bg-lighta">
+        <form class="col-lg-2" action="{{url_for('Feeds_Wrapper')}}">
+            <div class="form-group">
+              <button class="btn btn-dark btn-sm" href=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Go Back</button>
+            </div>
+        </form>
+        <div class="sec_title">
+          <h6>UPDATE DATA TO DB</h6>
+        </div>
+    {% for r in reviewlist %}
+    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('update_con_feeds_records')}}" id="rete" name="wform" >
+      <input type="hidden" class="form-control bg bg-light" id="accN" placeholder="" value="{{r['account']}}" name="accN" >
+       <fieldset  class="row sec1">
+         <legend class="ml-3">Edit Reviews</legend>
+          <div class="input-group col-lg-3 col-md-6 col-sm-12 col-xs-12">
+            <div class="">
+              <span class="input-group-text" id="basic-addon1">Feedback Type</span>
+            </div>
+          <select name="feedbacktype" class="custom-select mb-1" required>
+            <option value="" selected>Select Feedback Type</option>
+            <option value="Positive" {% if r['feedback_type'] == 'Positive' %} selected {% endif %}>Positive</option>
+            <option value="Negative" {% if r['feedback_type'] == 'Negative' %} selected {% endif %}>Negative</option>
+          </select> 
+          </div>
+          <div class="input-group col-lg-3 col-md-6 col-sm-12 col-xs-12">
+            <div class="">
+              <span class="input-group-text" id="basic-addon1">Feedback Source</span>
+            </div>
+            <select name="feedbacksource" class="custom-select mb-1" required>
+              <option value="" selected>Select Feedback Source</option>
+              <option value="DC" {% if r['feedback_source'] == 'DC' %} selected {% endif %}>DC</option>
+              <option value="Retailer" {% if r['feedback_source']== 'Retailer' %} selected {% endif %}>Retailer</option>
+              <option value="Central Facility" {% if r['feedback_source'] == 'Central Facility' %} selected {% endif %}>Central Facility</option>
+              <option value="Consumer" {% if r['feedback_source'] == 'Consumer' %} selected {% endif %}>Consumer</option>
+              <option value="Others" {% if r['feedback_source'] == 'Others' %} selected {% endif %}>Others</option>
+            </select> 
+          </div>
+         <div class="input-group col-lg-3 col-md-6 col-sm-12 col-xs-12">
+          <div class="">
+              <span class="input-group-text" id="basic-addon1">Order ID</span>
+            </div>
+            <input type="number" class="form-control mb-1" id="orderid" placeholder="Order Id(Optional)" name="orderid" value="{{r['order_id']}}" required>
+         </div>
+         <div class="input-group col-lg-3 col-md-6 col-sm-12 col-xs-12">
+          <div class="">
+              <span class="input-group-text" id="basic-addon1">Ratings</span>
+            </div>
+            <input type="number" class="form-control mb-1" id="ratngs" placeholder="Ratings" name="ratngs" value="{{r['ratings']}}" required>
+         </div>
+         <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Feedback Description</span>
+            </div>
+              <textarea class="form-control mb-1 rounded-0" id="feedbackdesc" placeholder="Description" name="feedbackdesc" aria-label="With textarea" rows="2" required>{{r['feedback_description']}}</textarea>
+          </div>
+          
+      </fieldset>
+      <div class="form-group col-lg-12 text-center m-4">
+         <button type="Submit" class="btn btn-primary">Update Info</button>
+      </div>
+      </div>
+   </form>
+   {% endfor %}
+   </div>
+</section>
+   {% endblock %}

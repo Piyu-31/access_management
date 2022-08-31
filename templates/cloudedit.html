@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block Cloud_editTemp %}
+<section id="section1" class="container-fluid">
+    <div class="row bg bg-lighta">
+        <form class="col-lg-2" action="{{url_for('AscWrapper')}}">
+            <div class="form-group">
+              <button class="btn btn-dark btn-sm" href=""><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Go Back</button>
+            </div>
+        </form>
+        <div class="sec_title">
+          <h6>Cloud Access Management</h6>
+        </div>
+    {% for c in cloudlist %}
+    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('update_cloud_records')}}" id="asce" name="wform" >
+      <input type="hidden" class="form-control bg bg-light" id="id" placeholder="Id" value="{{c['_id']}}" name="id" >
+       <fieldset  class="row sec1 ">
+         <legend class="ml-3">Edit Cloud User</legend>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">Org ID</span>
+              </div>
+              <input type="text" class="form-control mb-1" id="oid" placeholder="Org ID" name="oid" value="{{c['org_id']}}" readonly>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+              </div>
+              <input type="email" class="form-control mb-1" id="eid" placeholder="Email" value="{{c['email']}}" name="eid" required readonly>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">User Type</span>
+              </div>
+              <input type="text" class="form-control mb-1"  mb-1="utype" placeholder="User Type" value="{{c['user_type']}}" name="utype" required readonly>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">First Name</span>
+              </div>
+              <input type="text" class="form-control mb-1" id="fname" placeholder="First Name" value="{{c['first_name']}}" name="fname" required>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">Last Name</span>
+              </div>
+              <input type="text" class="form-control mb-1" id="lname" placeholder="Last Name" value="{{c['last_name']}}" name="lname" required>
+            </div>
+            <div class="input-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-1">
+              <div class="">
+                <span class="input-group-text" id="basic-addon1">Mobile#</span>
+              </div>
+              <input type="tel" class="form-control mb-1" id="phone" placeholder="Mobile#" value="{{c['user_contact']}}" name="phone" pattern="[1-9]{1}[0-9]{9}" title="please input 10 digit Mobile Number" required>        
+            </div>
+      </fieldset>
+      <div class="form-group col-lg-12 text-center m-4">
+         <button type="Submit" class="btn btn-primary">Update Info</button>
+      </div>
+      </div>
+   </form>
+   {% endfor %}
+   </div>
+</section>
+{% endblock %}
