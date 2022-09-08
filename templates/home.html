@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block home_temp %}
+
+
+	<div class="container">
+	  <div class="row">
+	    <div class="col-sm-6 mt-4 pt-4 pb-4">
+			  <div class="card" >
+			    <div class="card-body text-center mt-4 mb-4">
+			      <h4 class="card-title">Door Center  &nbsp;<span class="badge badge-pill badge-secondary">{{count_dcuser}}</span></h4>
+			      <a href="{{url_for('dcWrapper')}}" class="btn btn-primary">View</a>
+			    </div>
+			  </div>
+	    </div>
+
+	    <div class="col-sm-6 mt-4 pt-4 pb-4">
+	      
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Contractor &nbsp;<span class="badge badge-pill badge-secondary">{{count_conuser}}</span></h4>
+		      <a href="{{url_for('conWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+
+	    <div class="col-sm-6 mt-3 pb-4">
+	      
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Central Facility &nbsp;<span class="badge badge-pill badge-secondary">{{count_ascuser}}</span></h4>
+
+		      <a href="{{url_for('centralWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+
+	    <div class="col-sm-6 mt-3 pb-4">
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Retailer &nbsp;<span class="badge badge-pill badge-secondary">{{count_retuser}}</span></h4>
+		      
+		      <a href="{{url_for('RetailersWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+	    <div class="col-sm-6 mt-3 pb-4">
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Nexus Cloud &nbsp;<span class="badge badge-pill badge-secondary">{{count_user}}</span></h4>
+		      
+		      <a href="{{url_for('CloudWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+	    <div class="col-sm-6 mt-3 pb-4">
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Contractor Labor Rates &nbsp;<span class="badge badge-pill badge-secondary"></span></h4>
+		      <a href="{{url_for('Con_ratesWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+	    <div class="col-sm-6 mt-3 pb-4">
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Retailer Labor Rates &nbsp;<span class="badge badge-pill badge-secondary"></span></h4>
+		      <a href="{{url_for('ratesWrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+	    <div class="col-sm-6 mt-3 pb-4">
+		  <div class="card" >
+		    <div class="card-body text-center mt-4 mb-4">
+		      <h4 class="card-title">Reviews & Feedback&nbsp;<span class="badge badge-pill badge-secondary"></span></h4>
+		      <a href="{{url_for('Feeds_Wrapper')}}" class="btn btn-primary">View</a>
+		    </div>
+		  </div>
+	    </div>
+	  </div>
+	</div>
+
+
+
+{% endblock %}

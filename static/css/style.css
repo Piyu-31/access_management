@@ -1,0 +1,213 @@
+body {
+  font-family: "Lato", sans-serif;
+  transition: background-color .5s;
+  background-color: #eae6e6  !important;
+  background: url(https://fresible.com/wp-content/uploads/2018/04/Subtle-Light-Tile-Pattern-Vol2.jpg) fixed;
+
+}
+
+*, *:before, *:after{
+  box-sizing: border-box;
+}
+.bg-lighta {
+    background-color: #f8f9fab8 !important;
+}
+
+
+#main {
+  transition: margin-left .5s;
+  /*padding: 16px;*/
+}
+
+#section1{
+  margin-top: 20px !important;
+  border-top: 2px solid #d2d2d2;
+}
+#section2{
+  margin-top: 20px;
+  border-top: 2px solid #d2d2d2;
+}
+.sec_title{
+  text-align: center;
+  min-width: 200px;
+  max-width: 500px;
+  padding: 5px 15px 0px;
+  background-color: #d2d2d2;
+  position: absolute;
+  right: 2em;
+  z-index: 99;
+  float: right;
+}
+
+.bar_container {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: .9s;
+}
+#menu h4{
+  padding-top: 6px;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+    transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
+}
+
+.ptb-70{
+  padding-top: 70px;
+}
+.plr-30{
+  padding-left: : 30px;
+  padding-right: 30px;
+}
+.sec1 label{
+  display:none;
+  font-size: 12px;
+  background: #ddd;
+  padding: 0px 8px 2px;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: -5px;
+  margin-left: 10px;
+}
+.form-group{
+  margin-bottom: 0px !important;
+}
+
+.sec_title h6{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+legend{
+  margin-left: 0px !important;
+  width: auto !important;
+  min-width: 60px !important;
+  max-width: 300px !important;
+  border-bottom: 2px solid #9A9A9A;
+  font-size: 1rem !important;
+  font-weight: bold;
+}
+
+.nav_footer{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 999;
+  float: right;
+}
+.mt-8{
+  margin-top:80px; 
+}
+
+.border-double{
+  border: 3px double #ddd;
+}
+
+
+
+.button {
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+#b1
+{
+  width: 25%;
+}
+
+#ascf label,#asce label, #dce label, #cone label,#conf label, #rete label, #dcf label, #retf label, #diy label, #diye label, #fni label, #fnie label{
+  display: block !important;
+  font-size: 12px;
+  background: #ddd;
+  padding: 10px 8px 2px;
+  border-radius: 0px 5px 5px 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+  position: absolute;
+  right: 16px;
+  height: 90%;
+  color: #646363;
+  z-index: 1000;
+}
+
+
+/*Grid Columns*/
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4{
+  width: auto !important;
+}
+
+#dc button, #dc form{
+      float: left !important;
+    }
+
+@media screen and (max-width: 600px) {
+    #dc button{
+      float:none !important;
+      margin-bottom: 5px !important;
+    }
+    #dc .table-bordered{
+      border:none !important;
+    }
+    #dc form{
+      float:none !important;
+    }
+    #dc tr{
+      display: block !important;
+      margin-bottom: 15px !important;
+    }
+    #dc .t_header{
+      display: none;
+    }
+    #dc th{
+      display: none !important;
+    }
+    #dc table td{
+      width:100% !important;
+      border-bottom: 1px solid #ddd;
+      display: block !important;
+      font-size: .8em;
+      text-align: right;
+      padding: 5px 10px;
+    }
+
+    #dc table td::before {
+      content: attr(data-label) !important;
+      float: left !important;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    #dc button:nth-child(1), #dc button:nth-child(2){
+      float: right !important;
+    }
+
+    .sec_title{
+      background-color: #d2d2d2;
+      width: 100% !important;
+      float: right;
+      right: 0px;
+      position: relative !important;
+      margin: 0 4.5%;
+    }
+
+}

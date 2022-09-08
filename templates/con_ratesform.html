@@ -1,0 +1,144 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block conrates_formTemp %}
+    <div class="row">
+  </div>
+  <!-- Content Section -->
+  <section id="section1">
+      <div class="row bg bg-lighta">
+          <div class="sec_title">
+              <h6 >Contractor Labor Rates Management</h6>
+          </div>
+          <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12 mt-2" method="POST" action="{{url_for('save_con_rates_records')}}"name="wform" >
+              <fieldset  class="row sec1">
+                  <legend class="ml-3">Add New Labor Type & Rate</legend>
+                    <div class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">ID Name</span>
+                      </div>
+                      <input type="text" class="form-control mb-1" id="laboridname" placeholder="ID Name" name="laboridname" required>
+                    </div>
+                    <div class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Rates</span>
+                      </div>
+                      <select name="default" class="custom-select mb-1" required>
+                      <option selected>Select value</option>
+                      <option value="rate" {% if contractor_labor_default_value == 'rate' %} selected {% endif %}>rate</option>
+                      <option value="text" {% if contractor_labor_default_value == 'text' %} selected {% endif %}>text
+                      </option>
+                    </select>
+                  </div>
+                    <div class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Category</span>
+                      </div>
+                      <input type="text" class="form-control mb-1" id="laborgrpname" placeholder="Category" name="laborgrpname" required>
+                    </div>
+                     <div class="input-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="">
+                        <span class="input-group-text" id="basic-addon1">Labor Type</span>
+                      </div>
+                       <input type="text" class="form-control mb-1" id="laboruilabel" placeholder="Labor Type" name="laboruilabel" required>
+                    </div> 
+              </fieldset>
+              <div class="form-group col-lg-12 text-center m-4">
+                <button type="Submit" class="btn btn-primary">Add</button>
+              </div>
+                    </form>
+                </div>
+        </section>
+<!-- View table Section -->
+<section id="section2" class="bg bg-lighta">
+    <div class="sec_title">
+        <h6 id="select_txt">Rates &nbsp;<span class="badge badge-pill badge-secondary"></span></h6>
+    </div>
+
+    <div class="col-lg-12 mt-4 pt-2">
+      <div class="bg bg-dark text-light border border-white">
+        <div class="row">
+          <div class="col-lg-2 text-left pt-2 pb-2 pl-4 pr-0 border border-light">ID Name</div>
+          <div class="col-lg-3 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Category</div>
+          <div class="col-lg-4 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Labor Type</div>
+          <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Rates</div>
+          <div class="col-lg-2 text-left pt-2 pb-2 pl-1 pr-0 border border-light">Action</div>
+        </div>
+      </div>
+      {% for r in rateslist %}
+      <div class="row">
+        <div class="col-lg-2 text-left pt-2 pb-2 pl-4 pr-0 border border-light">{{r["contractor_labor_id_name"]}}</div>
+        
+        <div class="col-lg-3 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{r["contractor_labor_group_name"]}}</div>
+        
+        <div class="col-lg-4 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{r["contractor_labor_UI_label"]}}</div>
+        
+        <div class="col-lg-1 text-left pt-2 pb-2 pl-1 pr-0 border border-light">{{r["contractor_labor_default_value"]}}</div>
+        
+        <div class="col-lg-2 text-left pt-2 pb-2 border border-light">
+          <form method="POST" action="/editConRates/{{r['_id']}}" class="" >
+            <div class="form-group ">
+              <button type="submit" class="btn btn-success btn-sm mr-2 ml-2 d-inline float-left" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+            </div>
+          </form>
+
+          <span data-toggle="tooltip" title="Delete">
+            <button type="button" data-toggle="modal" data-target="#deletespl{{loop.index}}" class="btn btn-danger btn-sm d-inline mr-1 float-left"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+          </span>
+
+          <span data-toggle="tooltip" title="Deactivate">
+            <button type="button" data-toggle="modal" data-target="#deactivatecon{{loop.index}}" class="btn btn-dark btn-sm d-inline mr-1"><i class="fa fa-ban" aria-hidden="true"></i></button>
+          </span>
+
+          <!-- Modal For Delete -->
+              <div class="modal fade" id="deletespl{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg bg-secondary text-light">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">     
+                        <h5>Are you sure you want to delete?</h5>
+                        <form method="POST" action="/deleteConRates/{{r['_id']}}" class="d-inline">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-danger btn-sm d-inline mr-1 float-right">Confirm &nbsp;<i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                        </div>
+                        </form>                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal For Deactivate -->
+
+              <div class="modal fade" id="deactivatecon{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg bg-secondary text-light">
+                      <h5 class="modal-title" id="exampleModal">Deactivate</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">     
+                        <h5>Are you trying to deactivate?</h5>
+                        <form method="POST" action="/deactivateConRates/{{r['_id']}}" class="d-inline">
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-info btn-sm d-inline mr-1 float-right">Confirm &nbsp;<i class="fa fa-check-circle" aria-hidden="true"></i></button>
+                        </div>
+                        </form>                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+      </div>
+
+      {% endfor %}
+
+</div>
+</section>
+{% endblock %}

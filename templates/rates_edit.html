@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% set userNameCurrent=  user %}
+{% block rates_editTemp %}
+<section id="section1" class="bg bg-lighta">
+    <div class="row">
+      <form class="col-lg-1 mt-2 ml-3">
+          <div class="form-group">
+            <a class="nav-link btn btn-outline-dark btn-sm" href="{{url_for('ratesWrapper')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Back</a>
+          </div>
+        </form>
+        <div class="sec_title">
+          <h6>Retailer Labor Rates Management</h6>
+        </div> 
+    </div>
+    {% for l in rateslist  %}
+    <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12" method="POST" action="{{url_for('update_rates_records')}}"name="wform" >
+      <input type="hidden" class="form-control bg bg-light" id="id" placeholder="Id" value="{{l['_id']}}" name="id" >
+       <fieldset class="row sec1 mt-4 ml-1">
+         <legend >Edit Retailer Labor Rate</legend>
+          <div class="input-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="">
+              <span class="input-group-text" id="basic-addon1">ID Name</span>
+            </div>
+            <input type="text" class="form-control mb-1" id="laboridname" placeholder="ID Name" name="laboridname" value="{{l['retail_labor_id_name']}}" required>
+          </div>
+          <div class="input-group col-lg-8 col-md-4 col-sm-12 col-xs-12">
+            <div class="">
+              <span class="input-group-text" id="basic-addon1">Labor Service</span>
+            </div>
+            <input type="text" class="form-control mb-1" id="laborgrpname" placeholder="Labor Service" name="laborgrpname" value="{{l['retail_labor_service']}}" required>
+          </div>
+        </fieldset>
+         <fieldset  class="row sec1 mt-2 ml-1">
+          <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+              <span class="input-group-text" id="basic-addon1">Description</span>
+            </div>
+            <input type="text" class="form-control mb-1" id="laboruilabel" placeholder="Description" name="laboruilabel" value="{{l['retail_labor_description']}}" required>
+          </div>
+      </fieldset>
+      <div class="form-group col-lg-12 text-center m-4">
+         <button type="Submit" class="btn btn-primary">Update Info</button>
+      </div>
+      </div>
+   </form>
+   {% endfor %}
+   </div>
+</section>
+   {% endblock %}
